@@ -8,9 +8,9 @@
 <div class="custom grid gap-4">
   {#each orders as order}
     <article>
-      <div class="custom mb-2 flex items-baseline justify-between gap-4">
+      <div class="custom mb-2 flex items-baseline justify-between gap-4 flex-wrap">
         <h3>{order.name}</h3>
-        <div class="flex items-baseline gap-4">
+        <div class="flex items-baseline gap-4 flex-wrap">
           <a href={`/ordre/slett/${order.id}?from=${$page.url.pathname}`}>Slett</a>
           <a class="text-blue-500 decoration-inherit hover:text-blue-600" href={`/ordre/endre/${order.id}?from=${$page.url.pathname}`}
             >Endre</a

@@ -11,7 +11,6 @@
 
   // Check if any orders are taken
   const ordersNotTaken = $derived.by(() => availableOrders(bundles, orders));
-  $inspect(ordersNotTaken);
 </script>
 
 <svelte:head>
@@ -49,9 +48,9 @@
 
 {#each bundles as bundle}
   <article>
-    <div class="custom flex items-baseline justify-between gap-4 mb-4">
+    <div class="custom flex items-baseline justify-between gap-4 mb-4 flex-wrap">
       <h2>{bundle.name}</h2>
-      <div class="flex items-baseline gap-4">
+      <div class="flex items-baseline gap-4 flex-wrap">
         <a class="text-blue-500 decoration-inherit hover:text-blue-600" href={`/pakke/endre/${bundle.id}?from=${$page.url.pathname}`}>Endre</a>
         <a class="text-green-600 decoration-inherit hover:text-green-700" href={`/pakke/lag-kopi/${bundle.id}?from=${$page.url.pathname}`}>Lag kopi</a>
         <small class="rounded bg-slate-100 p-1">{bundle.created.split(" ")[0]}</small>
