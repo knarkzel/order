@@ -10,7 +10,6 @@
 
   // Check if any orders are taken
   const ordersNotTaken = $derived.by(() => availableOrders(bundles, orders));
-  $inspect(ordersNotTaken);
 </script>
 
 <svelte:head>
