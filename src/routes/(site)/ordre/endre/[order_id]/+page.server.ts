@@ -22,7 +22,7 @@ export const load: PageServerLoad = async ({ params: { order_id }, locals: { pb 
 };
 
 export const actions: Actions = {
-  default: async ({ request, locals: { pb } }) => {
+  default: async ({ request, params: { order_id }, locals: { pb } }) => {
     // Validate form
     const form = await superValidate(request, zod(schema));
     if (!form.valid) return fail(400, { form });
