@@ -1,5 +1,11 @@
 export function availableOrders(bundles, orders) {
-  return orders.filter((order) => bundles.some((bundle) => !bundle.expand?.orders.some((bundleOrder) => bundleOrder.id === order.id)));
+  if (bundles.length > 0) {
+    // Filter out orders that are already in bundles
+    const bundledOrderIds = new Set(bundles.flatMap(bundle => bundle.orders));
+    return orders.filter(order => !bundledOrderIds.has(order.id));
+  } else {
+    return orders;
+  }
 }
 
 export function contentToItems(content: string): string[] {

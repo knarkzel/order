@@ -14,9 +14,8 @@ const schema = z.object({
 export const load: PageServerLoad = async ({ params: { order_id }, locals: { pb } }) => {
   // Get order
   const order = await pb.collection("orders").getOne(order_id);
-  const content = order.items.map(line => `- ${line}`).join("\n");
-  console.log(order);
-  
+  const content = order.items.map((line) => `- ${line}`).join("\n");
+
   // Initialize form
   return {
     form: await superValidate({ ...order, content }, zod(schema)),

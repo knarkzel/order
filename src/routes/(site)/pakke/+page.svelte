@@ -1,8 +1,9 @@
 <script lang="ts">
+  import { page } from "$app/stores";
   import { availableOrders } from "$lib/order";
   import { superForm } from "sveltekit-superforms";
   import Orders from "$lib/components/Orders.svelte";
-
+  
   // Props
   const { data } = $props();
   const { bundles, orders } = $derived(data);
@@ -10,6 +11,7 @@
 
   // Check if any orders are taken
   const ordersNotTaken = $derived.by(() => availableOrders(bundles, orders));
+  $inspect(ordersNotTaken);
 </script>
 
 <svelte:head>
@@ -47,7 +49,14 @@
 
 {#each bundles as bundle}
   <article>
-    <h2>{bundle.name}</h2>
-    <Orders orders={bundle.expand.orders} />
+    <div class="custom flex items-baseline justify-between gap-4 mb-4">
+      <h2>{bundle.name}</h2>
+      <div class="flex items-baseline gap-4">
+        <a class="text-blue-500 decoration-inherit hover:text-blue-600" href={`/pakke/endre/${bundle.id}?from=${$page.url.pathname}`}>Endre</a>
+        <a class="text-green-600 decoration-inherit hover:text-green-700" href={`/pakke/lag-kopi/${bundle.id}?from=${$page.url.pathname}`}>Lag kopi</a>
+        <small class="rounded bg-slate-100 p-1">{bundle.created.split(" ")[0]}</small>
+      </div>
+    </div>
+    <Orders orders={bundle.expand.orders} bundle_id={bundle.id} />
   </article>
 {/each}
