@@ -1,11 +1,16 @@
 <script lang="ts">
+  import { availableOrders } from "$lib/order";
   import { superForm } from "sveltekit-superforms";
   import Orders from "$lib/components/Orders.svelte";
   
   // Props
   const { data } = $props();
-  const { orders } = $derived(data);
+  const { orders, bundles } = $derived(data);
   const { form, errors, submitting, enhance } = superForm(data.form);
+
+  // Check if any orders are taken
+  const ordersNotTaken = $derived.by(() => availableOrders(bundles, orders));
+  $inspect(ordersNotTaken);
 </script>
 
 <svelte:head>
@@ -30,4 +35,4 @@
   <button type="submit" aria-busy={$submitting} disabled={$submitting}>Lag ordre</button>
 </form>
 
-<Orders {orders} />
+<Orders orders={ordersNotTaken} />

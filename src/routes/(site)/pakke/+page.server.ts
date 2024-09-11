@@ -11,18 +11,20 @@ const schema = z.object({
 
 export const load: PageServerLoad = async ({ locals: { pb } }) => {
   // Get bundles and orders
-  const bundles = await pb.collection("bundles").getList(1, 25, {
-    expand: "orders",
-    sort: "-created",
-  });
-  const orders = await pb.collection("orders").getFullList({
-    sort: "-created",
-  });
+  const [bundles, orders] = await Promise.all([
+    pb.collection("bundles").getFullList({
+      expand: "orders",
+      sort: "-created",
+    }),
+    pb.collection("orders").getFullList({
+      sort: "-created",
+    }),
+  ]);
 
   // Initialize form
   return {
     form: await superValidate(zod(schema)),
-    bundles: bundles.items,
+    bundles,
     orders,
   };
 };
