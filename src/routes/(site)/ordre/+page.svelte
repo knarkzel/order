@@ -2,7 +2,7 @@
   import { availableOrders } from "$lib/order";
   import { superForm } from "sveltekit-superforms";
   import Orders from "$lib/components/Orders.svelte";
-  
+
   // Props
   const { data } = $props();
   const { orders, bundles } = $derived(data);

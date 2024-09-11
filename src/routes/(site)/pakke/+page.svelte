@@ -19,7 +19,9 @@
 <h1>Pakke</h1>
 
 {#if ordersNotTaken.length == 0}
-  <p>Du har ingen ordre som kan legges til i en pakke. Hvis du skal lage en ny pakke, lag noen ordre først under <a href="/ordre">Ordre</a>.</p>
+  <p>
+    Du har ingen ordre som kan legges til i en pakke. Hvis du skal lage en ny pakke, lag noen ordre først under <a href="/ordre">Ordre</a>.
+  </p>
 {:else}
   <form method="POST" use:enhance>
     <label for="name">
