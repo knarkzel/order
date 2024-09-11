@@ -11,7 +11,7 @@
     packages.x86_64-linux = bix.buildNodePackage {
       src = ./.;
       packages = ./package.json;
-      hash = "sha256-FLl4/6tHNFsX+4I23JQ37dqVYeVH+7crI5z8bIbNaEQ=";
+      hash = "sha256-beRu8/dnPPgtjEiqLbn9/zPA86BpZM3LjQOkgeNe74Y=";
     };
   };
 }
