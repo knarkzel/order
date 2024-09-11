@@ -10,23 +10,14 @@ const schema = z.object({
   content: z.string().min(1, { message: "Bestilling kan ikke være tom" }),
 });
 
-export const load: PageServerLoad = async ({ locals: { pb } }) => {
-  // Get bundles and orders
-  const [bundles, orders] = await Promise.all([
-    pb.collection("bundles").getFullList({
-      expand: "orders",
-      sort: "-created",
-    }),
-    pb.collection("orders").getFullList({
-      sort: "-created",
-    }),
-  ]);
-
+export const load: PageServerLoad = async ({ params: { order_id }, locals: { pb } }) => {
+  // Get order
+  const order = await pb.collection("orders").getOne(order_id);
+  const content = order.items.map(line => `- ${line}`).join("\n");
+  
   // Initialize form
   return {
-    form: await superValidate(zod(schema)),
-    orders,
-    bundles,
+    form: await superValidate({ ...order, content }, zod(schema)),
   };
 };
 
@@ -37,15 +28,15 @@ export const actions: Actions = {
     if (!form.valid) return fail(400, { form });
     const { name, content } = form.data;
 
-    // Create order
+    // Update order
     try {
-      await pb.collection("orders").create({
+      await pb.collection("orders").update(order_id, {
         name,
         items: contentToItems(content),
       });
     } catch (message) {
       console.error(message);
-      return setError(form, "content", "Klarte ikke å lage bestilling");
+      return setError(form, "content", "Klarte ikke å oppdatere bestilling");
     }
   },
 };
