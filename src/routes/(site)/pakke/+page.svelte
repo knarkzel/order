@@ -33,7 +33,7 @@
 
     <fieldset>
       <legend>Ordre:</legend>
-      {#each orders as order}
+      {#each ordersNotTaken as order}
         <label>
           <input type="checkbox" name="orders" value={order.id} bind:group={$form.orders} />
           {order.name}

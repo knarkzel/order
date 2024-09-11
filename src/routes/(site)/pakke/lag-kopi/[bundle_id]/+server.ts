@@ -12,7 +12,7 @@ export const GET: RequestHandler = async ({ url, params: { bundle_id }, locals: 
     const order = await pb.collection("orders").create({
       ...bundleOrder,
       id: undefined,
-    });
+    }, { requestKey: null });
     return order.id;
   }));
   

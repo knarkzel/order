@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <title>Ordre - Kjøtt På Døra</title>
+  <title>Endre ordre - Kjøtt På Døra</title>
 </svelte:head>
 
 <h1>Endre ordre</h1>
