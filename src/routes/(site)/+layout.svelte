@@ -12,7 +12,7 @@
 
       <div class="custom flex items-center gap-4">
         <a href="/ordre">Ordre</a>
-        <a href="/bestilling">Bestilling</a>
+        <a href="/pakke">Pakke</a>
       </div>
     </div>
   </div>

@@ -1,2 +1,2 @@
 <h1>Oversikt</h1>
-<p>Alt sammen er gjort.</p>
+<p>Gå til <a href="/ordre">Ordre</a> for å komme i gang.</p>

@@ -9,12 +9,12 @@ const schema = z.object({
   content: z.string().min(1, { message: "Bestilling kan ikke være tom" }),
 });
 
-export const load: PageServerLoad = async ({ locals: { pb }}) => {
+export const load: PageServerLoad = async ({ locals: { pb } }) => {
   // Get orders
-  const orders = await pb.collection("order").getList(1, 25, {
-    sort: "-created"
+  const orders = await pb.collection("orders").getList(1, 25, {
+    sort: "-created",
   });
-  
+
   // Initialize form
   return {
     form: await superValidate(zod(schema)),
@@ -30,11 +30,14 @@ export const actions: Actions = {
     const { name, content } = form.data;
 
     // Create order
-    const items = content.split("\n").map(line => {
-      return line.replace(/^[-\s]+/, "").trim();
-    }).filter(line => line.length > 0);
+    const items = content
+      .split("\n")
+      .map((line) => {
+        return line.replace(/^[-\s]+/, "").trim();
+      })
+      .filter((line) => line.length > 0);
     try {
-      await pb.collection("order").create({
+      await pb.collection("orders").create({
         name,
         items,
       });
