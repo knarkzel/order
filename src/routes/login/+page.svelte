@@ -6,6 +6,10 @@
   const { form, errors, submitting, enhance } = superForm(data.form);
 </script>
 
+<svelte:head>
+  <title>Login - Kjøtt På Døra</title>
+</svelte:head>
+
 <div class="flex h-screen items-center justify-center">
   <div class="max-w-sm flex-grow">
     <h1>Login</h1>

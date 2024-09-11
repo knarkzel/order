@@ -1,11 +1,16 @@
 <script lang="ts">
   import { superForm } from "sveltekit-superforms";
-
+  import Orders from "$lib/components/Orders.svelte";
+  
   // Props
   const { data } = $props();
   const { orders } = $derived(data);
   const { form, errors, submitting, enhance } = superForm(data.form);
 </script>
+
+<svelte:head>
+  <title>Ordre - Kjøtt På Døra</title>
+</svelte:head>
 
 <h1>Ordre</h1>
 
@@ -25,13 +30,4 @@
   <button type="submit" aria-busy={$submitting} disabled={$submitting}>Lag ordre</button>
 </form>
 
-{#each orders as order}
-  <article>
-    <h3>{order.name}</h3>
-    <ul class="mb-0">
-      {#each order.items as item}
-        <li>{item}</li>
-      {/each}
-    </ul>
-  </article>
-{/each}
+<Orders {orders} />

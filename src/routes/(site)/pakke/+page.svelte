@@ -1,11 +1,16 @@
 <script lang="ts">
   import { superForm } from "sveltekit-superforms";
-
+  import Orders from "$lib/components/Orders.svelte";
+  
   // Props
   const { data } = $props();
   const { bundles, orders } = $derived(data);
   const { form, errors, submitting, enhance } = superForm(data.form);
 </script>
+
+<svelte:head>
+  <title>Pakke - Kjøtt På Døra</title>
+</svelte:head>
 
 <h1>Pakke</h1>
 
@@ -32,6 +37,7 @@
 
 {#each bundles as bundle}
   <article>
-    <p>{bundle.name}</p>
+    <h2>{bundle.name}</h2>
+    <Orders orders={bundle.expand.orders} />
   </article>
 {/each}
