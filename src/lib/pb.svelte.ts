@@ -1,7 +1,7 @@
 import PocketBase from "pocketbase";
-import { PUBLIC_POCKETBASE_URL } from "$env/static/public";
+import { env } from "$env/dynamic/public";
 
-export const pb = new PocketBase(PUBLIC_POCKETBASE_URL);
+export const pb = new PocketBase(env.PUBLIC_POCKETBASE_URL);
 
 $effect.root(() => {
   $effect(() => {
