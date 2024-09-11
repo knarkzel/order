@@ -6,14 +6,13 @@ export const handle: Handle = async ({ event, resolve }) => {
   pb.authStore.loadFromCookie(event.request.headers.get("cookie") || "");
 
   // Synchronize pb and user
-  event.locals.pb = pb;
-  if (event.locals.pb.authStore.isValid) {
-    const model = event.locals.pb.authStore.model;
-    event.locals.admin = structuredClone(model);
+  if (pb.authStore.isValid) {
+    event.locals.admin = structuredClone(pb.authStore.model);
   } else {
     event.locals.admin = undefined;
   }
-
+  event.locals.pb = pb;
+  
   // If not logged in as admin, redirect to login
   if (!event.locals.admin && !event.url.pathname.startsWith("/login")) {
     return redirect(302, `/login?from=${event.url}`);

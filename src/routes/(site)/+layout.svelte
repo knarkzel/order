@@ -13,6 +13,8 @@
       <div class="custom flex items-center gap-4">
         <a href="/ordre">Ordre</a>
         <a href="/pakke">Pakke</a>
+        <a href="/faktura">Faktura</a>
+        <a href="/logout" role="button" data-sveltekit-reload>Logg ut</a>
       </div>
     </div>
   </div>

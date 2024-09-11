@@ -29,9 +29,5 @@
 
       <button type="submit" aria-busy={$submitting} disabled={$submitting}>Login</button>
     </form>
-
-    <p class="text-center">
-      Don't have an account? <a href="/register">Register</a>
-    </p>
   </div>
 </div>
